@@ -8,7 +8,21 @@
 
   <ItemGroup>
     <Folder Include="DTOs\" />
+    <Folder Include="HelperServices\" />
     <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.3.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.26">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.26" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BusSeatBookingSystem.Repository\BusSeatBookingSystem.Repository.csproj" />
   </ItemGroup>
 
 </Project>
