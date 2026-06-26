@@ -1,17 +1,14 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using BusSeatBookingSystem.Entity.Entities.BusEntities;
 using static BusSeatBookingSystem.Entity.Entities.enums;
 
-namespace BusSeatBookingSystem.Entity.Entities.UserEntities
+namespace BusSeatBookingSystem.Entity.Entities.UserEntities;
+
+public class ApplicationUser : IdentityUser
 {
-    public class ApplicationUser : IdentityUser
-    {
-        public string FirstName { get; set; }
-        public string LastName { get; set; } = string.Empty;
-        public Gender Gender { get; set; } 
-    }
+    public string FirstName { get; set; } = string.Empty;
+    public string LastName { get; set; } = string.Empty;
+    public Gender Gender { get; set; }
+    public ICollection<Booking> Bookings { get; set; } = new List<Booking>();
+    public ICollection<PasswordOtp> PasswordOtps { get; set; } = new List<PasswordOtp>();
 }
