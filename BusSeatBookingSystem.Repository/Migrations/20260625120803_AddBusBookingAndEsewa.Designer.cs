@@ -4,6 +4,7 @@ using BusSeatBookingSystem.Repository.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BusSeatBookingSystem.Repository.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260625120803_AddBusBookingAndEsewa")]
+    partial class AddBusBookingAndEsewa
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,21 +44,6 @@ namespace BusSeatBookingSystem.Repository.Migrations
 
                     b.Property<DateTime>("CreatedAtUtc")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("PassengerEmail")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("PassengerName")
-                        .IsRequired()
-                        .HasMaxLength(120)
-                        .HasColumnType("nvarchar(120)");
-
-                    b.Property<string>("PassengerPhone")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
 
                     b.Property<DateTime>("ReservedUntilUtc")
                         .HasColumnType("datetime2");
@@ -335,48 +323,6 @@ namespace BusSeatBookingSystem.Repository.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("BusSeatBookingSystem.Entity.Entities.UserEntities.PasswordOtp", b =>
-                {
-                    b.Property<Guid>("PasswordOtpId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("CodeHash")
-                        .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
-
-                    b.Property<DateTime>("CreatedAtUtc")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("ExpiresAtUtc")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("FailedAttempts")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Purpose")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Salt")
-                        .IsRequired()
-                        .HasMaxLength(64)
-                        .HasColumnType("nvarchar(64)");
-
-                    b.Property<DateTime?>("UsedAtUtc")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("PasswordOtpId");
-
-                    b.HasIndex("UserId", "Purpose", "CreatedAtUtc");
-
-                    b.ToTable("PasswordOtps");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -581,17 +527,6 @@ namespace BusSeatBookingSystem.Repository.Migrations
                     b.Navigation("Booking");
                 });
 
-            modelBuilder.Entity("BusSeatBookingSystem.Entity.Entities.UserEntities.PasswordOtp", b =>
-                {
-                    b.HasOne("BusSeatBookingSystem.Entity.Entities.UserEntities.ApplicationUser", "User")
-                        .WithMany("PasswordOtps")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -670,8 +605,6 @@ namespace BusSeatBookingSystem.Repository.Migrations
             modelBuilder.Entity("BusSeatBookingSystem.Entity.Entities.UserEntities.ApplicationUser", b =>
                 {
                     b.Navigation("Bookings");
-
-                    b.Navigation("PasswordOtps");
                 });
 #pragma warning restore 612, 618
         }
